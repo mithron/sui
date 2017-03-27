@@ -39,7 +39,7 @@ def compare(path='all_data.csv'):
     predictions = predict_2016()
     cmp['error'] = data2016['y'] - predictions['yhat']
     cmp['prob'] = 100*cmp['error']/data2016[y]
-    print('MAPE: ' + str(np.mean(abs(cmp_df[-13:]['prob']))))
-    print('MAE :'+ str(np.mean(abs(cmp_df[-13:]['error']))))
+    print('MAPE: ' + str(np.mean(abs(cmp[-13:]['prob']))))
+    print('MAE :'+ str(np.mean(abs(cmp[-13:]['error']))))
 
     
