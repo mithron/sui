@@ -1,8 +1,9 @@
 from fbprophet import Prophet
 import pandas as pd
+import numpy as np
 import datetime as dt
 
-def read_convert(path='data_before_2015.csv'):
+def read_convert(path='all_data.csv'):
     '''
     read and make pandas DataFrame from suicide rosstat data
     '''
@@ -22,11 +23,23 @@ def predict_2016():
     make and return fbprophet monthly predictions for 2016 year based
     on prev years data
     '''
-    df = read_convert()
-    m = Prophet().fit(df)
-    future = m.make_future_dataframe(periods=12, freq='M')
-    fcst = m.predict(future)
-    return fcst[-12:]
+    data_prev = read_convert()[:-13]
+    m = Prophet().fit(data_prev)
+    future = m.make_future_dataframe(periods=13, freq='M')
+    print(future.tail())
+    predictions = m.predict(future)
+    print(predictions)
+    return predictions[-13:]
 
-def compare():
-    pass
+def compare(path='all_data.csv'):
+    '''
+    compare predictions and true results
+    '''
+    data2016 = read_convert(path)[-13:]
+    predictions = predict_2016()
+    cmp['error'] = data2016['y'] - predictions['yhat']
+    cmp['prob'] = 100*cmp['error']/data2016[y]
+    print('MAPE: ' + str(np.mean(abs(cmp_df[-13:]['prob']))))
+    print('MAE :'+ str(np.mean(abs(cmp_df[-13:]['error']))))
+
+    
