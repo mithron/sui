@@ -1,0 +1,8 @@
+cairocffi==0.8.0
+Cython==0.25.2
+fbprophet==0.1.post1
+matplotlib==2.0.0
+numpy==1.12.1
+pandas==0.19.2
+pexpect==4.2.1
+pystan==2.14.0.0
